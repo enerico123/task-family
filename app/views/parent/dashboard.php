@@ -36,7 +36,7 @@
         <td>10</td>
         <td>Lucas</td>
         <td>En attente</td>
-        <td><a href="../child/dashboard.php">Valider</a></td>
+        <td><button>Valider</button></td>
       </tr>
       <tr>
         <td>Ranger la chambre</td>
