@@ -29,6 +29,9 @@ class Router {
 
         // CHILD 
         if ($uri === '/child') {
+            require __DIR__ . '/Auth.php';
+            Auth::requireRole('enfant');
+
             require __DIR__ . '/../app/controllers/ChildController.php';
             (new ChildController())->dashboard();
             exit;
@@ -36,6 +39,9 @@ class Router {
         // PARENT
 
         if ($uri === '/parent') {
+            require __DIR__ . '/Auth.php';
+            Auth::requireRole('parent');
+            
             require __DIR__ . '/../app/controllers/ParentController.php';
             (new ParentController())->dashboard();
             exit;
