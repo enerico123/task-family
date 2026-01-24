@@ -12,18 +12,28 @@ class Router {
             header('Location: /login');
             exit;
         }
-
-        if ($uri === '/login') {
+        //----------- LOGIN  -------
+        // GET
+        if ($uri === '/login' && $_SERVER['REQUEST_METHOD'] === 'GET') {
             require __DIR__ . '/../app/controllers/AuthController.php';
             (new AuthController())->showLogin();
             exit;
         }
 
+        // POST 
+        if ($uri === '/login' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+            require __DIR__ . '/../app/controllers/AuthController.php';
+            (new AuthController())->login();
+            exit;
+        }
+
+        // CHILD 
         if ($uri === '/child') {
             require __DIR__ . '/../app/controllers/ChildController.php';
             (new ChildController())->dashboard();
             exit;
         }
+        // PARENT
 
         if ($uri === '/parent') {
             require __DIR__ . '/../app/controllers/ParentController.php';

@@ -1,13 +1,13 @@
 <?php
 
-require_once __DIR__ . '/../../config/db.php';
+
 
 class User
 {
     public static function findByUsername(string $username){
         global $bd;
 
-        $req1=$bd->prepare('SELECT * 
+        $req1=$bd->prepare('SELECT id, username,password_hash,role,points 
                             FROM `users`
                             WHERE username = :username ;');
 
