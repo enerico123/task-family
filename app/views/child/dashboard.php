@@ -13,7 +13,7 @@
   </style>
 </head>
 <body>
-
+  <header><a href="/logout">Se déconnecter</a></header>
   <h1>Espace Enfant</h1>
 
   <h2>Mes points</h2>

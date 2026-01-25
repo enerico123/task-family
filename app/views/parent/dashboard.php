@@ -13,7 +13,7 @@
   </style>
 </head>
 <body>
-
+  <header><a href="/logout">Se déconnecter</a></header>
   <h1>Espace Parent</h1>
 
   <h2>Créer une tâche</h2>
