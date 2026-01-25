@@ -35,6 +35,7 @@ class Router {
             (new AuthController())->logout();
             exit;
         }
+
         // CHILD 
         if ($uri === '/child') {
             require __DIR__ . '/Auth.php';
@@ -54,7 +55,27 @@ class Router {
             (new ParentController())->dashboard();
             exit;
         }
+        
 
+        // PAGE AJOUT DE TACHE
+        // GET PAGE -> afficher la page 
+        if($uri === '/tasks/new' && $_SERVER['REQUEST_METHOD'] === 'GET'){
+            require __DIR__ . '/Auth.php';
+            Auth::requireRole('parent'); // etre bien parent 
+
+            require __DIR__ . '/../app/controllers/TaskController.php';
+            (new TaskController())->new();
+            exit;
+        }
+        // POST -> ajouter dans la db
+        if ($uri === '/tasks/create' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+            require __DIR__ . '/Auth.php';
+            Auth::requireRole('parent'); // etre bien parent 
+
+            require __DIR__ . '/../app/controllers/TaskController.php';
+            (new TaskController())->create();
+            exit;
+        }
     }
 }
 ?>

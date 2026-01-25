@@ -17,7 +17,7 @@
   <h1>Espace Parent</h1>
 
   <h2>Créer une tâche</h2>
-  <button>+ Nouvelle tâche</button>
+  <a href="/tasks/new">Nouvelle tâche</a>
 
   <h2>Liste des tâches</h2>
   <table>
@@ -51,10 +51,11 @@
           echo '<td>'.$points.'</td>';
           echo '<td>'.$assigned_name.'</td>';
           echo '<td>'.$status.'</td>';
+
           if($status === 'en attente'){
             echo '<td><button>Valider</button></td>';
           } else {
-            echo ' - '; 
+            echo '<td> - </td>'; 
           }
           
         echo '</tr>';
@@ -72,14 +73,18 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Lucas</td>
-        <td>40</td>
-      </tr>
-      <tr>
-        <td>Emma</td>
-        <td>25</td>
-      </tr>
+      <?php
+      foreach($leaders as $leader){
+        $nom = $leader['username'];
+        $points = $leader['points'];
+
+        echo '<tr>';
+          echo '<td>'.$nom.'</td>';
+          echo '<td>'.$points.'</td>';
+        echo '</tr>';
+
+      }
+      ?>
     </tbody>
   </table>
 

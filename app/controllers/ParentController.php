@@ -7,6 +7,7 @@ class ParentController {
   public function dashboard() {
     
     $tasks = Task::getAllTask();
+    $leaders = Task::getAllLeaders();
     require '../app/views/parent/dashboard.php';
 
   }
