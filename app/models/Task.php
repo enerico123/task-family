@@ -22,4 +22,17 @@ class Task
 
         return $req2->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function create(string $title, string $description, int $points, int $parentId){
+        global $bd;
+
+        $req3=$bd->prepare('INSERT INTO tasks (title, description, points, created_by, status)
+                        VALUES (:title, :description, :points, :created_by, "disponible")');
+
+        $req3->bindValue(":title",$title,PDO::PARAM_STR);
+        $req3->bindValue(":description",$description,PDO::PARAM_STR);
+        $req3->bindValue(":points",$points,PDO::PARAM_INT);
+        $req3->bindValue(":created_by",$parentId,PDO::PARAM_INT);
+        $req3->execute();
+    }
 }

@@ -17,7 +17,7 @@
   <h1>Espace Parent</h1>
 
   <h2>Créer une tâche</h2>
-  <button>+ Nouvelle tâche</button>
+  <a href="/tasks/new">Nouvelle tâche</a>
 
   <h2>Liste des tâches</h2>
   <table>
@@ -51,10 +51,11 @@
           echo '<td>'.$points.'</td>';
           echo '<td>'.$assigned_name.'</td>';
           echo '<td>'.$status.'</td>';
+
           if($status === 'en attente'){
             echo '<td><button>Valider</button></td>';
           } else {
-            echo ' - '; 
+            echo '<td> - </td>'; 
           }
           
         echo '</tr>';
