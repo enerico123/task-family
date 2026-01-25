@@ -70,4 +70,16 @@ class Task
 
         return $req5->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function assignToChild(int $taskId, int $childId){
+        global $bd;
+
+        $req6=$bd->prepare('UPDATE tasks
+                            SET assigned_to = :child_id, status = "en cours"
+                            WHERE id = :task_id');
+        
+        $req6->bindValue(':child_id',$childId,PDO::PARAM_INT);
+        $req6->bindValue(':task_id',$taskId,PDO::PARAM_INT);
+        $req6->execute();
+    }
 }

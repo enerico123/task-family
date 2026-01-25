@@ -61,17 +61,18 @@
           echo '<td>'.$titre.'</td>';
           echo '<td>'.$description.'</td>';
           echo '<td>'.$points.'</td>';
-          echo '<td><button>Prendre la tâche</button></td>';
+          echo '<td>';
+
+          echo '<form method="POST" action="/tasks/take">';
+          echo '    <input type="hidden" name="task_id" value="'.$id.'">';
+          echo '    <button type="submit">Prendre la tâche</button>';
+          echo '</form>';
+
+          echo '</td>';
         echo '</tr>';
       }
       ?>
       
-      <tr>
-        <td>Sortir les poubelles</td>
-        <td>Ranger la chambre</td>
-        <td>5</td>
-        <td><button>Prendre la tâche</button></td>
-      </tr>
     </tbody>
   </table>
 
