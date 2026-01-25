@@ -82,4 +82,27 @@ class Task
         $req6->bindValue(':task_id',$taskId,PDO::PARAM_INT);
         $req6->execute();
     }
+
+    public static function getTaskChildId(int $childId){
+        global $bd;
+
+        $req7=$bd->prepare('SELECT 
+            t.id,
+            t.title,
+            t.description,
+            t.points,
+            t.status,
+            t.created_by,
+            t.assigned_to,
+            u.username AS assigned_name
+            FROM tasks t
+            LEFT JOIN users u ON t.assigned_to = u.id
+            WHERE status = "en cours" AND assigned_to = :user_id
+            ORDER BY t.id ASC;');
+
+        $req7->bindValue(':user_id',$childId,PDO::PARAM_INT);
+        $req7->execute();
+
+        return $req7->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

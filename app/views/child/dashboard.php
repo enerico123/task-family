@@ -30,12 +30,22 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Faire la vaisselle</td>
-        <td>10</td>
-        <td>En cours</td>
-        <td><button>J’ai terminé</button></td>
-      </tr>
+      <?php
+      foreach($tasks_enfant_cible as $enfant){
+        $titre = $enfant["title"];
+        $description = $enfant["description"];
+        $points = $enfant["points"];
+        $id = $enfant["id"];
+        $status = $enfant["status"];
+
+        echo '<tr>';
+          echo '<td>'.$titre.'</td>';
+          echo '<td>'.$points.'</td>';
+          echo '<td>'.$status.'</td>';
+          echo '<td><button>J\'ai terminé</button></td>';
+        echo '</tr>';
+      }
+      ?>
     </tbody>
   </table>
 
