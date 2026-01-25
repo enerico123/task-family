@@ -35,4 +35,17 @@ class Task
         $req3->bindValue(":created_by",$parentId,PDO::PARAM_INT);
         $req3->execute();
     }
+
+    public static function getAllLeaders(){
+        global $bd; 
+
+        $req4=$bd->prepare('SELECT username,points
+                            FROM `users`
+                            WHERE role = "enfant"
+                            ORDER BY points DESC;');
+
+        $req4->execute();
+
+        return $req4->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

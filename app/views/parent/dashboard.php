@@ -73,14 +73,18 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Lucas</td>
-        <td>40</td>
-      </tr>
-      <tr>
-        <td>Emma</td>
-        <td>25</td>
-      </tr>
+      <?php
+      foreach($leaders as $leader){
+        $nom = $leader['username'];
+        $points = $leader['points'];
+
+        echo '<tr>';
+          echo '<td>'.$nom.'</td>';
+          echo '<td>'.$points.'</td>';
+        echo '</tr>';
+
+      }
+      ?>
     </tbody>
   </table>
 
