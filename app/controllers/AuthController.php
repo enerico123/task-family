@@ -37,6 +37,13 @@ class AuthController {
 
     exit;
   }
+
+  public function logout(){
+    $_SESSION = [];
+    session_destroy();
+    header('Location: /login');
+    exit;
+  }
 }
 
 ?>

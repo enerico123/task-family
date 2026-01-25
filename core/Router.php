@@ -27,6 +27,14 @@ class Router {
             exit;
         }
 
+
+        // -------- LOGOUT ------- 
+
+        if ($uri === '/logout'){
+            require __DIR__ . '/../app/controllers/AuthController.php';
+            (new AuthController())->logout();
+            exit;
+        }
         // CHILD 
         if ($uri === '/child') {
             require __DIR__ . '/Auth.php';
