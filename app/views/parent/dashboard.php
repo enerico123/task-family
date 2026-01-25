@@ -31,20 +31,35 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Faire la vaisselle</td>
-        <td>10</td>
-        <td>Lucas</td>
-        <td>En attente</td>
-        <td><button>Valider</button></td>
-      </tr>
-      <tr>
-        <td>Ranger la chambre</td>
-        <td>15</td>
-        <td>-</td>
-        <td>Disponible</td>
-        <td>-</td>
-      </tr>
+      <?php
+      foreach($tasks as $task){
+        $titre = $task["title"];
+        $description = $task["description"];
+        $points = $task["points"];
+        $status = $task["status"];
+        $created_by = $task["created_by"];
+        if (empty($task["assigned_to"])) {
+            $assigned_name = ' - ';
+        } else {
+            $assigned_name = $task["assigned_name"];
+        }
+        $id = $task["id"];
+
+
+        echo '<tr>';
+          echo '<td>'.$titre.'</td>';
+          echo '<td>'.$points.'</td>';
+          echo '<td>'.$assigned_name.'</td>';
+          echo '<td>'.$status.'</td>';
+          if($status === 'en attente'){
+            echo '<td><button>Valider</button></td>';
+          } else {
+            echo ' - '; 
+          }
+          
+        echo '</tr>';
+      }
+      ?>
     </tbody>
   </table>
 
