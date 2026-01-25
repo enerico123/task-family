@@ -48,4 +48,26 @@ class Task
 
         return $req4->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function getAllTaskDispo(){
+        global $bd;
+
+        $req5=$bd->prepare('SELECT 
+            t.id,
+            t.title,
+            t.description,
+            t.points,
+            t.status,
+            t.created_by,
+            t.assigned_to,
+            u.username AS assigned_name
+            FROM tasks t
+            LEFT JOIN users u ON t.assigned_to = u.id
+            WHERE status = "disponible"
+            ORDER BY t.id ASC;');
+
+        $req5->execute();
+
+        return $req5->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

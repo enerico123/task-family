@@ -44,18 +44,31 @@
     <thead>
       <tr>
         <th>Tâche</th>
+        <th>description</th>
         <th>Points</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Ranger la chambre</td>
-        <td>15</td>
-        <td><button>Prendre la tâche</button></td>
-      </tr>
+      <?php
+      foreach($tasks_dispo as $task){
+        $titre = $task["title"];
+        $description = $task["description"];
+        $points = $task["points"];
+        $id = $task["id"];
+
+        echo '<tr>';
+          echo '<td>'.$titre.'</td>';
+          echo '<td>'.$description.'</td>';
+          echo '<td>'.$points.'</td>';
+          echo '<td><button>Prendre la tâche</button></td>';
+        echo '</tr>';
+      }
+      ?>
+      
       <tr>
         <td>Sortir les poubelles</td>
+        <td>Ranger la chambre</td>
         <td>5</td>
         <td><button>Prendre la tâche</button></td>
       </tr>
