@@ -120,11 +120,24 @@ class Task
     public static function changeTaskStatus2(int $taskId){
         global $bd;
 
-        $req8=$bd->prepare('UPDATE `tasks` 
+        $req9=$bd->prepare('UPDATE `tasks` 
                             SET `status` = "validée" 
                             WHERE `tasks`.`id` = :id_task ;');
 
-        $req8->bindValue(':id_task',$taskId,PDO::PARAM_INT);
-        $req8->execute();
+        $req9->bindValue(':id_task',$taskId,PDO::PARAM_INT);
+        $req9->execute();
     }
+
+    public static function ajoutPoint(int $points,int $childId){
+        global $bd;
+
+        $req10=$bd->prepare('UPDATE `users` 
+                            SET `points` = `points` + :pointus
+                            WHERE `users`.`id` = :user_id;');
+
+        $req10->bindValue(':pointus',$points,PDO::PARAM_INT);
+        $req10->bindValue(':user_id',$childId,PDO::PARAM_INT);
+        $req10->execute();
+    }
+
 }
