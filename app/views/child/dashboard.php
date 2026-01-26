@@ -38,6 +38,7 @@
     </thead>
     <tbody>
       <?php
+      
       foreach($tasks_enfant_cible as $enfant){
         $titre = $enfant["title"];
         $description = $enfant["description"];
@@ -51,6 +52,11 @@
           echo '<td>'.$status.'</td>';
           echo '<td><button>J\'ai terminé</button></td>';
         echo '</tr>';
+      }
+      if (!$tasks_enfant_cible){
+        echo '<td colspan=4>';
+        echo 'Aucune tâche en cours';
+        echo '</td>';
       }
       ?>
     </tbody>
@@ -87,6 +93,11 @@
 
           echo '</td>';
         echo '</tr>';
+      }
+      if (!$tasks_dispo){
+        echo '<td colspan=4>';
+        echo 'Aucune tâche disponible';
+        echo '</td>';
       }
       ?>
       
