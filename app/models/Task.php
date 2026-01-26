@@ -116,4 +116,15 @@ class Task
         $req8->bindValue(':id_task',$taskId,PDO::PARAM_INT);
         $req8->execute();
     }
+
+    public static function changeTaskStatus2(int $taskId){
+        global $bd;
+
+        $req8=$bd->prepare('UPDATE `tasks` 
+                            SET `status` = "validée" 
+                            WHERE `tasks`.`id` = :id_task ;');
+
+        $req8->bindValue(':id_task',$taskId,PDO::PARAM_INT);
+        $req8->execute();
+    }
 }

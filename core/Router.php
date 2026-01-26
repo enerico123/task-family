@@ -94,6 +94,15 @@ class Router {
             (new TaskController())->finish();
             exit;
         }
+
+        if ($uri === '/tasks/validated' && $_SERVER['REQUEST_METHOD'] === 'POST'){
+            require __DIR__ . '/Auth.php';
+            Auth::requireRole('parent');
+
+            require __DIR__ . '/../app/controllers/TaskController.php';
+            (new TaskController())->validated();
+            exit;
+        }
     }
 }
 ?>
