@@ -17,7 +17,14 @@
   <h1>Espace Enfant</h1>
 
   <h2>Mes points</h2>
-  <p><strong>Points actuels :</strong> 40</p>
+  <?php
+  foreach($points as $point){
+    $pountos = $point["points"];
+
+    echo '<p><strong>Points actuels :</strong> '.$pountos.'</p>';
+  }
+  ?>
+  
 
   <h2>Tâche en cours</h2>
   <table>
