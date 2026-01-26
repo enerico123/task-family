@@ -50,7 +50,12 @@
           echo '<td>'.$titre.'</td>';
           echo '<td>'.$points.'</td>';
           echo '<td>'.$status.'</td>';
-          echo '<td><button>J\'ai terminé</button></td>';
+          echo '<td>';
+          echo '<form method="POST" action="/tasks/finish">';
+              echo '<input type="hidden" name="task_id" value="'.$id.'">';
+              echo '<button type="submit">Terminé !</button>';
+          echo '</form>';
+          echo '</td>';
         echo '</tr>';
       }
       if (!$tasks_enfant_cible){

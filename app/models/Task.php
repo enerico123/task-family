@@ -105,4 +105,15 @@ class Task
 
         return $req7->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function changeTaskStatus(int $taskId){
+        global $bd;
+
+        $req8=$bd->prepare('UPDATE `tasks` 
+                            SET `status` = "en attente" 
+                            WHERE `tasks`.`id` = :id_task ;');
+
+        $req8->bindValue(':id_task',$taskId,PDO::PARAM_INT);
+        $req8->execute();
+    }
 }

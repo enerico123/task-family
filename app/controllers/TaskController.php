@@ -44,4 +44,12 @@ class TaskController
         header('Location: /child');
         exit;
     }
+
+    public function finish(){
+        $taskId = (int)($_POST['task_id'] ?? 0);
+
+        Task::changeTaskStatus($taskId);
+        header('Location: /child');
+        exit;
+    }
 }

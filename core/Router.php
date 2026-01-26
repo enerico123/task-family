@@ -85,6 +85,15 @@ class Router {
             (new TaskController())->take();
             exit;
         }
+
+        if ($uri === '/tasks/finish' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+            require __DIR__ . '/Auth.php';
+            Auth::requireRole('enfant');
+
+            require __DIR__ . '/../app/controllers/TaskController.php';
+            (new TaskController())->finish();
+            exit;
+        }
     }
 }
 ?>
