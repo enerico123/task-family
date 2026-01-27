@@ -52,4 +52,11 @@ class TaskController
         header('Location: /child');
         exit;
     }
+
+    public function validated(){
+        $taskId = (int)($_POST['task_id'] ?? 0);
+        Task::validateAndReward($taskId);
+        header('Location: /parent');
+        exit;
+    }
 }

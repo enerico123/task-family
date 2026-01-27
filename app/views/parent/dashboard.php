@@ -38,6 +38,7 @@
         $points = $task["points"];
         $status = $task["status"];
         $created_by = $task["created_by"];
+        $assigned_to = $task["assigned_to"];
         if (empty($task["assigned_to"])) {
             $assigned_name = ' - ';
         } else {
@@ -53,7 +54,12 @@
           echo '<td>'.$status.'</td>';
 
           if($status === 'en attente'){
-            echo '<td><button>Valider</button></td>';
+            echo '<td>';
+            echo '<form method="POST" action="/tasks/validated">';
+                echo '<input type="hidden" name="task_id" value="'.$id.'">';
+                echo '<button type="submit">Valider</button>';
+            echo '</form>';
+            echo '</td>';
           } else {
             echo '<td> - </td>'; 
           }

@@ -116,4 +116,77 @@ class Task
         $req8->bindValue(':id_task',$taskId,PDO::PARAM_INT);
         $req8->execute();
     }
+
+    public static function changeTaskStatus2(int $taskId){
+        global $bd;
+
+        $req9=$bd->prepare('UPDATE `tasks` 
+                            SET `status` = "validée" 
+                            WHERE `tasks`.`id` = :id_task ;');
+
+        $req9->bindValue(':id_task',$taskId,PDO::PARAM_INT);
+        $req9->execute();
+    }
+
+
+    // OLTP pour les points a revoir plus tard le fonctionnement
+    public static function validateAndReward(int $taskId): void
+    {
+        global $bd;
+
+        $bd->beginTransaction();
+
+        try {
+            // 1) Lire les infos fiables depuis la DB
+            $stmt = $bd->prepare(
+                'SELECT assigned_to, points
+                FROM tasks
+                WHERE id = :task_id
+                AND status = "en attente"
+                LIMIT 1'
+            );
+            $stmt->execute(['task_id' => $taskId]);
+            $task = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // tâche inexistante ou pas "en attente" => on stop
+            if (!$task) {
+                $bd->rollBack();
+                return;
+            }
+
+            $childId = (int)$task['assigned_to'];
+            $points  = (int)$task['points'];
+
+            // sécurité: il doit y avoir un enfant assigné
+            if ($childId <= 0) {
+                $bd->rollBack();
+                return;
+            }
+
+            // 2) Ajouter les points à l'enfant
+            $stmt = $bd->prepare(
+                'UPDATE users
+                SET points = points + :points
+                WHERE id = :child_id'
+            );
+            $stmt->execute([
+                'points'   => $points,
+                'child_id' => $childId
+            ]);
+
+            // 3) Passer la tâche en "validée"
+            $stmt = $bd->prepare(
+                'UPDATE tasks
+                SET status = "validée"
+                WHERE id = :task_id'
+            );
+            $stmt->execute(['task_id' => $taskId]);
+
+            $bd->commit();
+        } catch (Throwable $e) {
+            $bd->rollBack();
+            throw $e; // en dev tu verras l'erreur, plus tard tu loggueras
+        }
+    }
+
 }
