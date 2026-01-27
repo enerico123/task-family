@@ -1,5 +1,10 @@
 <?php
 
+require_once __DIR__ . '/Auth.php';
+require_once __DIR__ . '/../app/controllers/AuthController.php';
+require_once __DIR__ . '/../app/controllers/TaskController.php';
+require_once __DIR__ . '/../app/controllers/ChildController.php';
+require_once __DIR__ . '/../app/controllers/ParentController.php';
 
 
 class Router {
@@ -15,15 +20,15 @@ class Router {
         //----------- LOGIN  -------
         // GET
         if ($uri === '/login' && $_SERVER['REQUEST_METHOD'] === 'GET') {
-            require __DIR__ . '/../app/controllers/AuthController.php';
+            
             (new AuthController())->showLogin();
             exit;
         }
 
         // POST 
         if ($uri === '/login' && $_SERVER['REQUEST_METHOD'] === 'POST') {
-            require __DIR__ . '/../app/controllers/AuthController.php';
-            (new AuthController())->login();
+
+        (new AuthController())->login();
             exit;
         }
 
@@ -31,27 +36,23 @@ class Router {
         // -------- LOGOUT ------- 
 
         if ($uri === '/logout'){
-            require __DIR__ . '/../app/controllers/AuthController.php';
+            
             (new AuthController())->logout();
             exit;
         }
 
         // CHILD 
         if ($uri === '/child') {
-            require __DIR__ . '/Auth.php';
             Auth::requireRole('enfant');
 
-            require __DIR__ . '/../app/controllers/ChildController.php';
             (new ChildController())->dashboard();
             exit;
         }
         // PARENT
 
         if ($uri === '/parent') {
-            require __DIR__ . '/Auth.php';
             Auth::requireRole('parent');
             
-            require __DIR__ . '/../app/controllers/ParentController.php';
             (new ParentController())->dashboard();
             exit;
         }
@@ -60,49 +61,44 @@ class Router {
         // PAGE AJOUT DE TACHE
         // GET PAGE -> afficher la page 
         if($uri === '/tasks/new' && $_SERVER['REQUEST_METHOD'] === 'GET'){
-            require __DIR__ . '/Auth.php';
             Auth::requireRole('parent'); // etre bien parent 
 
-            require __DIR__ . '/../app/controllers/TaskController.php';
             (new TaskController())->new();
             exit;
         }
         // POST -> ajouter dans la db
         if ($uri === '/tasks/create' && $_SERVER['REQUEST_METHOD'] === 'POST') {
-            require __DIR__ . '/Auth.php';
             Auth::requireRole('parent'); // etre bien parent 
 
-            require __DIR__ . '/../app/controllers/TaskController.php';
             (new TaskController())->create();
             exit;
         }
 
         if ($uri === '/tasks/take' && $_SERVER['REQUEST_METHOD'] === 'POST') {
-            require __DIR__ . '/Auth.php';
             Auth::requireRole('enfant');
 
-            require __DIR__ . '/../app/controllers/TaskController.php';
             (new TaskController())->take();
             exit;
         }
 
         if ($uri === '/tasks/finish' && $_SERVER['REQUEST_METHOD'] === 'POST') {
-            require __DIR__ . '/Auth.php';
             Auth::requireRole('enfant');
 
-            require __DIR__ . '/../app/controllers/TaskController.php';
             (new TaskController())->finish();
             exit;
         }
 
-        if ($uri === '/tasks/validated' && $_SERVER['REQUEST_METHOD'] === 'POST'){
-            require __DIR__ . '/Auth.php';
+        if ($uri === '/tasks/validate' && $_SERVER['REQUEST_METHOD'] === 'POST'){
             Auth::requireRole('parent');
 
-            require __DIR__ . '/../app/controllers/TaskController.php';
-            (new TaskController())->validated();
+
+            (new TaskController())->validate();
             exit;
         }
+
+        http_response_code(404);
+        echo '404 - Page not found';
+        exit;
     }
 }
 ?>

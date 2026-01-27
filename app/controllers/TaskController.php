@@ -16,13 +16,11 @@ class TaskController
         $description = trim($_POST['description'] ?? '');
         $points = (int)($_POST['points'] ?? 0);
         $parentId = $_SESSION['user_id'];
-
-        if ($title === '') {
-            die('Titre obligatoire');
-        }
-        if ($points < 0) {
-            die('Points négatif impossible');
-        }
+        
+        if ($title === '' || $points < 0) {
+        header('Location: /tasks/new');
+        exit;
+}
 
         Task::create($title,$description,$points,$parentId);
         
@@ -53,7 +51,7 @@ class TaskController
         exit;
     }
 
-    public function validated(){
+    public function validate(){
         $taskId = (int)($_POST['task_id'] ?? 0);
         Task::validateAndReward($taskId);
         header('Location: /parent');

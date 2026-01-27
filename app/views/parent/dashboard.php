@@ -55,7 +55,7 @@
 
           if($status === 'en attente'){
             echo '<td>';
-            echo '<form method="POST" action="/tasks/validated">';
+            echo '<form method="POST" action="/tasks/validate">';
                 echo '<input type="hidden" name="task_id" value="'.$id.'">';
                 echo '<button type="submit">Valider</button>';
             echo '</form>';
