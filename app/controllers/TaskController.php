@@ -55,10 +55,7 @@ class TaskController
 
     public function validated(){
         $taskId = (int)($_POST['task_id'] ?? 0);
-        $points = (int)($_POST['ptn'] ?? 0);
-        $childId = (int)($_POST['child_id'] ?? 0);
-        Task::ajoutPoint($points,$childId);
-        Task::changeTaskStatus2($taskId);
+        Task::validateAndReward($taskId);
         header('Location: /parent');
         exit;
     }

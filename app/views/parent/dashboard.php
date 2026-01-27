@@ -57,8 +57,6 @@
             echo '<td>';
             echo '<form method="POST" action="/tasks/validated">';
                 echo '<input type="hidden" name="task_id" value="'.$id.'">';
-                echo '<input type="hidden" name="ptn" value="'.$points.'">';
-                echo '<input type="hidden" name="child_id" value="'.$assigned_to.'">';
                 echo '<button type="submit">Valider</button>';
             echo '</form>';
             echo '</td>';
