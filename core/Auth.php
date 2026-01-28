@@ -2,7 +2,7 @@
 
 class Auth
 {
-    public static function check()
+    public static function check(): bool
     {
         return isset($_SESSION['user_id']);
     }
@@ -15,7 +15,7 @@ class Auth
         }
     }
 
-    public static function requireRole(string $role)
+    public static function requireRole(string $role): void 
     {
         self::requireLogin();
 

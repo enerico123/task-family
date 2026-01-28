@@ -1,3 +1,5 @@
+<?php require __DIR__ . '/../layout/header.php'; ?>
+
 <h1>Nouvelle tâche</h1>
 
 <form method="POST" action="/tasks/create">
@@ -15,3 +17,5 @@
 
 <br>
 <a href="/parent">Retour</a>
+
+<?php require __DIR__ . '/../layout/footer.php'; ?>
