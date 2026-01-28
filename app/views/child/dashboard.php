@@ -1,18 +1,5 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title>Espace Enfant</title>
-  <style>
-    /*a mettre dans css*/
-    body { font-family: Arial; padding: 20px; }
-    table { border-collapse: collapse; width: 100%; margin-bottom: 30px; }
-    th, td { border: 1px solid #ccc; padding: 10px; }
-    th { background: #f4f4f4; }
-    button { padding: 6px 12px; }
-  </style>
-</head>
-<body>
+<?php require __DIR__ . '/../layout/header.php'; ?>
+
   <header><a href="/logout">Se déconnecter</a></header>
   <h1>Espace Enfant</h1>
 
@@ -109,5 +96,4 @@
     </tbody>
   </table>
 
-</body>
-</html>
+<?php require __DIR__ . '/../layout/footer.php'; ?>

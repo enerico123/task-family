@@ -1,10 +1,6 @@
 
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Connexion</title>
-</head>
-<body>
+<?php require __DIR__ . '/../layout/header.php'; ?>
+
     <h1>Connexion</h1>
 
     <form method="POST" action="/login">
@@ -12,5 +8,5 @@
     <input type="password" name="password" placeholder="Mot de passe" required><br><br>
     <button type="submit">Connexion</button>
     </form>
-</body>
-</html>
+
+<?php require __DIR__ . '/../layout/footer.php'; ?>
