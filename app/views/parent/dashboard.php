@@ -1,19 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title>Espace Parent</title>
-  <style>
-    /*a mettre dans css*/
-    body { font-family: Arial; padding: 20px; }
-    table { border-collapse: collapse; width: 100%; margin-bottom: 30px; }
-    th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
-    th { background: #f4f4f4; }
-    button { padding: 6px 12px; }
-  </style>
-</head>
-<body>
+
+  <?php require __DIR__ . '/../layout/header.php'; ?>
+
   <header><a href="/logout">Se déconnecter</a></header>
+
   <h1>Espace Parent</h1>
 
   <h2>Créer une tâche</h2>
@@ -94,5 +83,5 @@
     </tbody>
   </table>
 
-</body>
-</html>
+
+  <?php require __DIR__ . '/../layout/footer.php'; ?>
